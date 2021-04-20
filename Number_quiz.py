@@ -69,6 +69,7 @@ def find_answer(number):
         return answer[1:]
 
 def number_quiz():
+    print('----------------------------------------------')
 
     print("recommanded courses :\n1 ~ 100\n100 ~ 1000\n1000 ~ 10000\n10000 ~ 1000000")
     print('----------------------------------------------')
