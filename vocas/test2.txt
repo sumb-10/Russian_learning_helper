@@ -1,0 +1,3 @@
+walk : 4
+travel : 5
+go : 6

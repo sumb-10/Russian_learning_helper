@@ -1,3 +1,0 @@
-word : ´Ü¾î
-work : ÀÏ
-mouse : Áã
