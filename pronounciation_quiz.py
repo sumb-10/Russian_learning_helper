@@ -4,10 +4,10 @@ kiril_alphabet = {'Аа' : '/a/', 'Бб' : '/b/', 'Вв' : '/v/', 'Гг' : '/ɡ/
 consonants = ['б', 'в', 'г', 'д', 'ж', 'з', 'й', 'к', 'л', 'м', 'н', 'п', 'р', 'с', 'т', 'ф', 'х', 'ц', 'ч', 'ш', 'щ']
 hard_indicating_vowel = ['а', 'о', 'э', 'ы', 'у']
 soft_indicating_vowel = ['я', 'е', 'ё', 'и', 'ю']
-paired_voiced_and_unvoiced_consonants = {'Б' : 'П', 'В' : 'Ф', 'Г' : 'К', 'Д' : 'Т', 'Ж' :'Ш', 'З' : 'С'}
-paired_unvoiced_and_voiced_consonants = {v : k for k, v in paired_voiced_and_unvoiced_consonants.items()}
-unpaired_voiced_consonants = ['Л', 'М', 'Н', 'Р']
-unpaired_unvoiced_consonats = ['X', 'Ц', 'Ч', 'Щ']
+paired_voiced_consonants = ['б', 'в', 'г', 'д', 'ж', 'з']
+paired_unvoiced_consonants = ['п', 'ф', 'к', 'т', 'ш', 'с']
+unpaired_voiced_consonants = ['л', 'м', 'н', 'р']
+unpaired_unvoiced_consonats = ['х', 'ц', 'ч', 'щ']
 
 
 def alphabet_pronounciation_quiz():
@@ -89,8 +89,17 @@ def analyze_consonants_sounds(word):
             if letter in consonants:
                 hard_consonants_marking_list.append(letter_idx)
 
-        if letter in
+        if letter in unpaired_voiced_consonants or letter in paired_voiced_consonants:
+            if letter_idx == wordlen - 1:
+                unvoiced_consonants_marking_list.append(letter_idx)
+            elif letter in paired_voiced_consonants and (word[letter_idx + 1] in paired_unvoiced_consonants or word[letter_idx + 1] in unpaired_unvoiced_consonats):
+                unvoiced_consonants_marking_list.append(letter_idx)
+            else:
+                voiced_consonants_marking_list.append(letter_idx)
+        elif letter in unpaired_unvoiced_consonats or letter in paired_unvoiced_consonants:
+            unvoiced_consonants_marking_list.append(letter_idx)
 
+    print('hard and soft : ', end='')
     for letter_idx in range(wordlen):
         letter = word[letter_idx]
         if letter_idx in hard_consonants_marking_list:
@@ -99,6 +108,29 @@ def analyze_consonants_sounds(word):
             print("\033[1m" + "\033[34m" + letter + "\033[0m", end='')
         else:
             print(letter, end='')
+
+    print('\nvoiced and unvoiced : ', end='')
+    for letter_idx in range(wordlen):
+        letter = word[letter_idx]
+        if letter_idx in voiced_consonants_marking_list:
+            print("\033[1m" + "\033[31m" + letter + "\033[0m", end='')
+        elif letter_idx in unvoiced_consonants_marking_list:
+            print("\033[1m" + "\033[34m" + letter + "\033[0m", end='')
+        else:
+            print(letter, end='')
+
+    print(' [', end='')
+    for letter_idx in range(wordlen):
+        letter = word[letter_idx]
+        change_key = 0
+        if letter in paired_voiced_consonants and letter_idx in unvoiced_consonants_marking_list:
+            for i in range(6):
+                if paired_voiced_consonants[i] == letter:
+                    change_key = i
+                    print(paired_unvoiced_consonants[i], end='')
+        else:
+            print(letter, end='')
+    print(']')
 
     return 0
 
@@ -113,4 +145,4 @@ def consonants_hard_soft_sounds_quiz():
     if overlap_check == 'y':
         pass
 
-analyze_consonants_sounds('сестра')
+analyze_consonants_sounds('год')
