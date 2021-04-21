@@ -144,5 +144,3 @@ def consonants_hard_soft_sounds_quiz():
 
     if overlap_check == 'y':
         pass
-
-analyze_consonants_sounds('год')
