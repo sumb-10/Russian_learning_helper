@@ -1,10 +1,12 @@
+import random
+
 consonants = ['б', 'в', 'г', 'д', 'ж', 'з', 'й', 'к', 'л', 'м', 'н', 'п', 'р', 'с', 'т', 'ф', 'х', 'ц', 'ч', 'ш', 'щ']
 feminine_nouns = []
 masculine_nouns = []
 neutral_nouns = []
 feminine_nouns_ends_with_soft_sign = []
 masculine_nouns_ends_with_soft_sign = []
-gender_exception ={}
+gender_exception = {}
 
 def analyze_noun_gender(word):
     wordlen = len(word)
@@ -47,5 +49,50 @@ def analyze_noun_gender(word):
 
     return 0
 
-analyze_noun_gender('Писатель')
+def noun_gender_quiz(selected_vocas):
+    asked_list = []
+    max_idx = len(selected_vocas) - 1
+    print('----------------------------------------------')
+    print("I will give you a word. Answer if it is feminine or masuculine or neutral and why it is.")
+    print("The number asked once will not be asked twice.\nif you want to stop, please type 'stop'")
+    point = 0
+    tries = 0
+
+    while 1:
+        idx = random.randint(0, max_idx)
+        if idx in asked_list:
+            continue
+        else:
+            word = selected_vocas[idx]
+            print("Guess the gender : {}".format(word))
+            _ = input()
+            if _ == 'stop':
+                break
+            print("Answer:")
+            print(analyze_noun_gender(word))
+
+            score_record = int(input("if you got answer type '1', if not type '0' : "))
+            print('----------------------------------------------')
+            if score_record:
+                point += 1
+            tries += 1
+
+        print('number of questions was {} and you got {} points'.format(tries, point))
+
+        return 0
+
+def noun_gender_guess():
+    print('----------------------------------------------')
+    print("Write down the noun. I will figure out it's gender. if you want to quit, type stop")
+    print("The guess is only figured out by the databass so please search it on the internet. It could be wrong")
+
+    while 1:
+        word = input("Write down the noun : ")
+        if word == 'stop':
+            break
+        else:
+            analyze_noun_gender()
+
+    return 0
+
 

@@ -27,6 +27,8 @@ def write_new_voca_note():
         f.write(meaning + '\n')
     f.close
 
+    return 0
+
 
 def add_new_vocas():
     title = input("Write the title of voca note : ")
@@ -53,6 +55,8 @@ def add_new_vocas():
         f.write(meaning + '\n')
     f.close
 
+    return 0
+
 def edit_vocas():
     while 1:
         print('press 0 to write new voca note')
@@ -71,7 +75,5 @@ def edit_vocas():
         print('----------------------------------------------')
 
     return 0
-
-edit_vocas()
 
 

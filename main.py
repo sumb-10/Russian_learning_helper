@@ -1,11 +1,13 @@
 import os
+import random
 import number_quiz
 import pronounciation_quiz
-import gender_quiz
+import gender_review
 import plurals_quiz
 import edit_voca
 
 vocas_path = './vocas'
+vocabulary_book = {}
 
 def update_vocas_list():
     idx_count = 0
@@ -62,7 +64,7 @@ def main_menu():
             pronounciation_quiz.alphabet_pronounciation_quiz()
             _ = input('press any key to back to main menu')
         if select_course == '2':
-            gender_quiz()
+            gender_review()
             _ = input('press any key to back to main menu')
         if select_course == '3':
             plurals_quiz()
@@ -79,6 +81,6 @@ def main_menu():
     return 0
 
 if __name__ == "__main__":
-    update_vocas_list()
+    vocabulary_book = update_vocas_list()
     _ = input('press any key to start')
     main_menu()
