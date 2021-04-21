@@ -95,4 +95,22 @@ def noun_gender_guess():
 
     return 0
 
+def gender_review():
+    print('----------------------------------------------')
+    print("Let's review the gender part.")
+    while 1:
+        print('select the course and press enter to start')
+        print("0 = noun gender quiz")
+        print("1 = noun gender guess")
+        print("quit = exit")
+        select = input()
+        if select == '0':
+            noun_gender_quiz()
+        elif select == '1':
+            noun_gender_guess()
+        elif select == 'quit':
+            _ = input('Are you done? y/n : ')
+            if _ == 'y':
+                break
 
+    return 0
