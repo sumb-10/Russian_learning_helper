@@ -106,5 +106,3 @@ def number_quiz():
     print('number of questions was {} and you got {} points'.format(tries, point))
 
     return 0
-
-number_quiz()
