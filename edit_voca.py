@@ -4,7 +4,7 @@ vocas_path = './vocas'
 
 def write_new_voca_note():
     title = input("Write the title of voca note : ")
-    f = open(vocas_path + '/' + title +'.txt', 'w')
+    f = open(vocas_path + '/' + title +'.py', 'w')
     print('Write down the word you want to add. Please use the next form. [Word] : [meaning]')
     print('If it is done, write down [quit] and press enter key to finish')
     print('If you want to miswrite write down ! and press enter key to rewrite')
@@ -22,13 +22,15 @@ def write_new_voca_note():
             rewrite_check = input('Will you rewrite? y/n : ')
             if rewrite_check == 'y':
                 continue
-        f.write(writeline + '\n')
+        word, meaning = writeline.split(' : ')
+        f.write(word + '\n')
+        f.write(meaning + '\n')
     f.close
 
 
 def add_new_vocas():
     title = input("Write the title of voca note : ")
-    f = open(vocas_path + '/' + title + '.txt', 'a')
+    f = open(vocas_path + '/' + title + '.py', 'a')
     print('Write down the word you want to add. Please use the next form. [Word] : [meaning]')
     print('If it is done, write down [quit] and press enter key to finish')
     print('If you want to miswrite write down ! and press enter key to rewrite')
@@ -46,7 +48,9 @@ def add_new_vocas():
             rewrite_check = input('Will you rewrite? y/n : ')
             if rewrite_check == 'y':
                 continue
-        f.write(writeline + '\n')
+        word, meaning = writeline.split(' : ')
+        f.write(word + '\n')
+        f.write(meaning + '\n')
     f.close
 
 def edit_vocas():
@@ -68,5 +72,6 @@ def edit_vocas():
 
     return 0
 
+edit_vocas()
 
 
