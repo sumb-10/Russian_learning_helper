@@ -1,5 +1,7 @@
 import random
+from colorama import init, Fore, Style
 
+init()
 kiril_alphabet = {'Аа' : '/a/', 'Бб' : '/b/', 'Вв' : '/v/', 'Гг' : '/ɡ/', 'Дд' : '/d/', 'Ее' : '/je/', 'Ёё': '/jo/', 'Жж' : '/ʐ/', 'Зз' : '/z/', 'Ии' : '/i/, / ʲi/, or /ɨ/' , 'Йй' : '/j/', 'Кк' : '/k/ or /kʲ/', 'Лл' : '/ɫ/ or /lʲ/', 'Мм' : '/m/ or /mʲ/', 'Нн' : '/n/ or /nʲ/', 'Оо' : '/o/', 'Пп' : '/p/ or /pʲ/', 'Рр' : '/r/ or /rʲ/', 'Сс' : '/s/ or /sʲ/', 'Тт' : '/t/ or /tʲ/', 'Уу' : '/u/', 'Фф' : '/f/ or /fʲ/', 'Хх' : '/x/ or /xʲ/', 'Цц' : '/ts/', 'Чч' : '/tɕ/', 'Шш' : '/ʂ/', 'Щщ' : '/ɕː/, /ɕ/', 'Ъъ' : 'none', 'Ыы' : '[ɨ]', 'Ьь' : '/ ʲ/', 'Ээ' : '/e/', 'Юю' : '/ju/ or / ʲu/', 'Яя' : '/ja/ or / ʲa/'}
 consonants = ['б', 'в', 'г', 'д', 'ж', 'з', 'й', 'к', 'л', 'м', 'н', 'п', 'р', 'с', 'т', 'ф', 'х', 'ц', 'ч', 'ш', 'щ']
 hard_indicating_vowel = ['а', 'о', 'э', 'ы', 'у']
@@ -8,6 +10,7 @@ paired_voiced_consonants = ['б', 'в', 'г', 'д', 'ж', 'з']
 paired_unvoiced_consonants = ['п', 'ф', 'к', 'т', 'ш', 'с']
 unpaired_voiced_consonants = ['л', 'м', 'н', 'р']
 unpaired_unvoiced_consonats = ['х', 'ц', 'ч', 'щ']
+
 
 
 def alphabet_pronounciation_quiz():
@@ -103,9 +106,9 @@ def analyze_consonants_sounds(word):
     for letter_idx in range(wordlen):
         letter = word[letter_idx]
         if letter_idx in hard_consonants_marking_list:
-            print("\033[1m" + "\033[31m" + letter + "\033[0m", end='')
+            print(Fore.RED + letter + Style.RESET_ALL, end='')
         elif letter_idx in soft_consonants_marking_list:
-            print("\033[1m" + "\033[34m" + letter + "\033[0m", end='')
+            print(Fore.BLUE + letter + Style.RESET_ALL, end='')
         else:
             print(letter, end='')
 
@@ -113,9 +116,9 @@ def analyze_consonants_sounds(word):
     for letter_idx in range(wordlen):
         letter = word[letter_idx]
         if letter_idx in voiced_consonants_marking_list:
-            print("\033[1m" + "\033[31m" + letter + "\033[0m", end='')
+            print(Fore.RED + letter + Style.RESET_ALL, end='')
         elif letter_idx in unvoiced_consonants_marking_list:
-            print("\033[1m" + "\033[34m" + letter + "\033[0m", end='')
+            print(Fore.BLUE + letter + Style.RESET_ALL, end='')
         else:
             print(letter, end='')
 
@@ -143,6 +146,8 @@ def consonants_hard_soft_sounds_quiz(voca_dict):
     print("Then think about why it sounds like that and check the answer by pushing any key")
     print("If you want to stop, input 'stop' after I gave you a question")
     print("The word asked once will not be asked twice.")
+    print('hard , voiced = ' + Fore.RED + 'LETTER' + Style.RESET_ALL)
+    print('soft , unvoiced = ' + Fore.BLUE + 'LETTER' + Style.RESET_ALL)
     print('----------------------------------------------')
 
     point = 0
@@ -173,6 +178,8 @@ def consonants_sounds_guess():
     print('----------------------------------------------')
     print("Write down the noun. I will figure out how it's consonants pronounced. if you want to quit, type stop")
     print("The guess is only figured out by the database, so please search it on the internet. It could be wrong")
+    print('hard , voiced = ' + Fore.RED + 'LETTER' + Style.RESET_ALL)
+    print('soft , unvoiced = ' + Fore.Blue + 'LETTER' + Style.RESET_ALL)
 
     while 1:
         word = input("Write down the noun : ")

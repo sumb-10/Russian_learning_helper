@@ -1,10 +1,12 @@
 import os
+from colorama import init, Fore, Style
 import number_quiz
 import pronounciation_review
 import gender_review
 import plurals_review
 import edit_voca
 
+init()
 vocas_path = './vocas'
 vocabulary_book = {}
 voca_list = []
@@ -65,7 +67,7 @@ def main_menu():
 
     global selected_voca
 
-    print("Welcome to the " + '\033[97m' + "*" + '\033[94m' + "*" + '\033[91m' + "*" + '\033[97m' + " Russian" + '\033[94m' + " Learning" + '\033[91m' + " Helper" + '\033[97m' + " *" + '\033[94m' + "*" + '\033[91m' +"*" + '\033[0m' "!!")
+    print("Welcome to the " + Fore.WHITE + Style.BRIGHT + "*" + Fore.BLUE + Style.BRIGHT + "*" + Fore.RED + Style.BRIGHT + "*" + Fore.WHITE + Style.BRIGHT + " Russian" + Fore.BLUE + Style.BRIGHT + " Learning" + Fore.RED + Style.BRIGHT + " Helper" + Fore.BLUE + Style.BRIGHT + " *" + Fore.WHITE + Style.BRIGHT + "*" + Fore.RED + Style.BRIGHT + "*" + Style.RESET_ALL + "!!")
     print("This program is based on the lecture of 'Tanya's Russian Class' and originated by Hojin Cho, University Of Seoul.\nThe last update(v.1.0) was 2021.04.21")
     print('----------------------------------------------')
     _ = input('press any key to start')
