@@ -1,3 +1,0 @@
-папа : father
-мать : mother
-~
