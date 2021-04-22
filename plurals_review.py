@@ -64,6 +64,7 @@ def guess_plural_noun(voca_dict):
         tries += 1
 
     print('number of questions was {} and you got {} points'.format(tries, point))
+    print('----------------------------------------------')
     return 0
 
 def plural_review(voca_dict):

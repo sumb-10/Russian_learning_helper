@@ -96,7 +96,7 @@ def main_menu():
             plurals_review.plural_review(selected_voca)
             _ = input('press any key to back to main menu')
         if select_course == '4':
-            edit_voca()
+            edit_voca.edit_vocas()
             _ = input('press any key to back to main menu')
         if select_course == 'voca':
             for i in range(len(voca_list)):
