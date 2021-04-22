@@ -134,13 +134,77 @@ def analyze_consonants_sounds(word):
 
     return 0
 
-def consonants_hard_soft_sounds_quiz():
+def consonants_hard_soft_sounds_quiz(voca_dict):
+    word_list = list(voca_dict.keys())
+    asked_list = []
+    max_idx = len(voca_dict) - 1
     print('----------------------------------------------')
     print("I will give you a word, figure out which consonants sounds hard and which consonants sounds soft.")
     print("Then think about why it sounds like that and check the answer by pushing any key")
     print("If you want to stop, input 'stop' after I gave you a question")
-    overlap_check = input("Will you allow duplicated question? press y/n : ")
+    print("The word asked once will not be asked twice.")
     print('----------------------------------------------')
 
-    if overlap_check == 'y':
-        pass
+    point = 0
+    tries = 0
+
+    while 1:
+        idx = random.randint(0, max_idx)
+        if idx in asked_list:
+            continue
+        word = word_list[idx]
+        print("Guess the pronounciation : {}".format(word))
+        _ = input()
+        if _ == 'stop':
+            break
+        print("Answer : ")
+        analyze_consonants_sounds(word)
+        score_record = int(input("if you got answer type '1', if not type '0' : "))
+        print('----------------------------------------------')
+        if score_record:
+            point += 1
+        tries += 1
+
+    print('number of questions was {} and you got {} points'.format(tries, point))
+    print('----------------------------------------------')
+    return 0
+
+def consonants_sounds_guess():
+    print('----------------------------------------------')
+    print("Write down the noun. I will figure out how it's consonants pronounced. if you want to quit, type stop")
+    print("The guess is only figured out by the database, so please search it on the internet. It could be wrong")
+
+    while 1:
+        word = input("Write down the noun : ")
+        if word == 'stop':
+            print('----------------------------------------------')
+            break
+        else:
+            _ = input()
+            analyze_consonants_sounds(word)
+            print('----------------------------------------------')
+
+    return 0
+
+def pronounciation_review(voca_dict):
+    print('----------------------------------------------')
+    print("Let's review the pronounciation part.")
+    while 1:
+        print('select the course and press enter to start')
+        print("0 = alphabet pronounciation quiz")
+        print("1 = consonants sounds quiz")
+        print("2 = consonants sounds guess")
+        print("quit = exit")
+        select = input()
+        if select == '0':
+            alphabet_pronounciation_quiz()
+        elif select == '1':
+            consonants_hard_soft_sounds_quiz(voca_dict)
+        elif select == '2':
+            consonants_sounds_guess()
+        elif select == 'quit':
+            _ = input('Are you done? y/n : ')
+            if _ == 'y':
+                break
+
+    return 0

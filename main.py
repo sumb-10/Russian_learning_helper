@@ -1,6 +1,6 @@
 import os
 import number_quiz
-import pronounciation_quiz
+import pronounciation_review
 import gender_review
 import plurals_review
 import edit_voca
@@ -87,7 +87,7 @@ def main_menu():
             number_quiz.number_quiz()
             _ = input('press any key to back to main menu')
         if select_course == '1':
-            pronounciation_quiz.alphabet_pronounciation_quiz()
+            pronounciation_review.pronounciation_review(selected_voca)
             _ = input('press any key to back to main menu')
         if select_course == '2':
             gender_review.gender_review(selected_voca)
