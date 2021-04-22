@@ -1,0 +1,13 @@
+vocas
+
+__pycache__
+
+build
+
+dist
+
+*.ico
+
+*.zip
+
+*.exe
