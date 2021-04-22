@@ -604,9 +604,9 @@
    'c:\\users\\hj\\anaconda3\\lib\\distutils\\errors.py',
    'PYMODULE'),
   ('imp', 'c:\\users\\hj\\anaconda3\\lib\\imp.py', 'PYMODULE'),
-  ('_py_abc', 'c:\\users\\hj\\anaconda3\\lib\\_py_abc.py', 'PYMODULE'),
-  ('stringprep', 'c:\\users\\hj\\anaconda3\\lib\\stringprep.py', 'PYMODULE'),
   ('tracemalloc', 'c:\\users\\hj\\anaconda3\\lib\\tracemalloc.py', 'PYMODULE'),
+  ('stringprep', 'c:\\users\\hj\\anaconda3\\lib\\stringprep.py', 'PYMODULE'),
+  ('_py_abc', 'c:\\users\\hj\\anaconda3\\lib\\_py_abc.py', 'PYMODULE'),
   ('edit_voca',
    'C:\\Users\\hj\\Desktop\\2021 Hojin '
    'cho\\Russian_learning_helper\\edit_voca.py',
