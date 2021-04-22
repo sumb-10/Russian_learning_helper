@@ -120,5 +120,4 @@ if __name__ == "__main__":
     voca_list = list(vocabulary_book.keys())
     _ = input('press any key to start')
     selected_voca = select_voca()
-    print(selected_voca)
     main_menu()
