@@ -9,7 +9,6 @@ masculine_nouns_ends_with_soft_sign = []
 gender_exception = {}
 
 def analyze_noun_gender(word):
-    wordlen = len(word)
 
     if word in feminine_nouns:
         print("\033[34m" + '{} '.format(word) + "\033[0m" + 'is a feminine noun(Женский род)')
@@ -20,7 +19,7 @@ def analyze_noun_gender(word):
     elif word[-1] in consonants:
         print("\033[34m" + '{} '.format(word) + "\033[0m" + 'is a masculine noun(Мужской род)')
         print("Because it ends with 'consonants letter'")
-    elif word[-1] == 'а' or word[-1] == 'я':
+    if word[-1] == 'а' or word[-1] == 'я':
         print("\033[34m" + '{} '.format(word) + "\033[0m" + 'is a feminine noun(Женский род)')
         if word[-1] == 'а':
             print("Because it ends with 'a'")
@@ -49,12 +48,14 @@ def analyze_noun_gender(word):
 
     return 0
 
-def noun_gender_quiz(selected_vocas):
+def noun_gender_quiz(voca_dict):
+    word_list = list(voca_dict.keys())
     asked_list = []
-    max_idx = len(selected_vocas) - 1
+    max_idx = len(voca_dict) - 1
+    print(max_idx)
     print('----------------------------------------------')
     print("I will give you a word. Answer if it is feminine or masuculine or neutral and why it is.")
-    print("The number asked once will not be asked twice.\nif you want to stop, please type 'stop'")
+    print("The word asked once will not be asked twice.\nif you want to stop, please type 'stop'")
     point = 0
     tries = 0
 
@@ -62,40 +63,40 @@ def noun_gender_quiz(selected_vocas):
         idx = random.randint(0, max_idx)
         if idx in asked_list:
             continue
-        else:
-            word = selected_vocas[idx]
-            print("Guess the gender : {}".format(word))
-            _ = input()
-            if _ == 'stop':
-                break
-            print("Answer:")
-            print(analyze_noun_gender(word))
+        word = word_list[idx]
+        print("Guess the gender : {}".format(word))
+        _ = input()
+        if _ == 'stop':
+            break
+        print("Answer : ")
+        analyze_noun_gender(word)
+        score_record = int(input("if you got answer type '1', if not type '0' : "))
+        print('----------------------------------------------')
+        if score_record:
+            point += 1
+        tries += 1
 
-            score_record = int(input("if you got answer type '1', if not type '0' : "))
-            print('----------------------------------------------')
-            if score_record:
-                point += 1
-            tries += 1
-
-        print('number of questions was {} and you got {} points'.format(tries, point))
-
-        return 0
+    print('number of questions was {} and you got {} points'.format(tries, point))
+    return 0
 
 def noun_gender_guess():
     print('----------------------------------------------')
     print("Write down the noun. I will figure out it's gender. if you want to quit, type stop")
-    print("The guess is only figured out by the databass so please search it on the internet. It could be wrong")
+    print("The guess is only figured out by the database, so please search it on the internet. It could be wrong")
 
     while 1:
         word = input("Write down the noun : ")
         if word == 'stop':
+            print('----------------------------------------------')
             break
         else:
-            analyze_noun_gender()
+            _ = input()
+            analyze_noun_gender(word)
+            print('----------------------------------------------')
 
     return 0
 
-def gender_review():
+def gender_review(voca_dict):
     print('----------------------------------------------')
     print("Let's review the gender part.")
     while 1:
@@ -105,7 +106,7 @@ def gender_review():
         print("quit = exit")
         select = input()
         if select == '0':
-            noun_gender_quiz()
+            noun_gender_quiz(voca_dict)
         elif select == '1':
             noun_gender_guess()
         elif select == 'quit':

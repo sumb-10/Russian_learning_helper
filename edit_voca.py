@@ -15,6 +15,7 @@ def write_new_voca_note():
         if writeline.lower() == 'quit':
             end_check = input('Are you done? y/n : ')
             if end_check == 'y':
+                f.write('~')
                 break
 
         rewrite_signal = list(writeline)

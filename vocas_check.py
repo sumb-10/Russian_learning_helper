@@ -20,7 +20,7 @@ def update_vocas_list():
         f = open(vocas_path + '/' + title + '.txt', 'r')
         while True:
             line = f.readline()
-            if not line:
+            if line == '~':
                 break
             word_and_meaning = line.split(' : ')
             word = word_and_meaning[0]

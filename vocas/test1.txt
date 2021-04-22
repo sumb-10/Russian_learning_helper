@@ -1,3 +1,4 @@
-word : 1
-add : 2
-work : 3
+дом : house
+доктор : doctor
+инженер : engineer
+~
