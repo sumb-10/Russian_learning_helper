@@ -59,15 +59,30 @@ def guess_plural_noun(voca_dict):
         make_plural_noun(word)
         score_record = int(input("if you got answer type '1', if not type '0' : "))
         print('----------------------------------------------')
-        if score_record:
-            point += 1
-        tries += 1
+        while 1:
+            score_record = int(input("if you got answer type '1', if not type '0' : "))
+            print('----------------------------------------------')
+            if score_record == 1:
+                point += 1
+                break
+            elif score_record == 0:
+                tries += 1
+                break
+            else:
+                print("You pressed wrong key. Please input correct command")
+                _ = input('Press any key to retry')
 
     print('number of questions was {} and you got {} points'.format(tries, point))
     print('----------------------------------------------')
     return 0
 
-def plural_review(voca_dict):
+def plural_review(selected_voca, grammatical_vocabulary_book):
+
+    global plural_exceptions
+
+    plural_exceptions = (grammatical_vocabulary_book['plural_exceptions'].keys())
+    voca_dict = selected_voca.update(grammatical_vocabulary_book)
+
     print('----------------------------------------------')
     print("Let's review the plural noun part.")
     while 1:
@@ -81,5 +96,8 @@ def plural_review(voca_dict):
             _ = input('Are you done? y/n : ')
             if _ == 'y':
                 break
+        else:
+            print("You pressed wrong key. Please input correct command")
+            _ = input('Press any key to retry')
 
     return 0

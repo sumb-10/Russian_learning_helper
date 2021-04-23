@@ -97,11 +97,18 @@ def number_quiz():
             print("Answer:")
             print(find_answer(number))
 
-            score_record = int(input("if you got answer type '1', if not type '0' : "))
-            print('----------------------------------------------')
-            if score_record:
-                point += 1
-            tries += 1
+            while 1:
+                score_record = int(input("if you got answer type '1', if not type '0' : "))
+                print('----------------------------------------------')
+                if score_record == 1:
+                    point += 1
+                    break
+                elif score_record == 0:
+                    tries += 1
+                    break
+                else:
+                    print("You pressed wrong key. Please input correct command")
+                    _ = input('Press any key to retry')
 
     print('number of questions was {} and you got {} points'.format(tries, point))
 

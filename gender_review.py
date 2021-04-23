@@ -8,6 +8,23 @@ feminine_nouns_ends_with_soft_sign = []
 masculine_nouns_ends_with_soft_sign = []
 gender_exception = {}
 
+def update_noun_gender_list(grammatical_vocabulary_book):
+
+    global feminine_nouns
+    global masculine_nouns
+    global neutral_nouns
+    global feminine_nouns_ends_with_soft_sign
+    global masculine_nouns_ends_with_soft_sign
+
+    feminine_nouns = (grammatical_vocabulary_book['feminine_nouns'].keys())
+    masculine_nouns = (grammatical_vocabulary_book['masculine_nouns'].keys())
+    neutral_nouns = (grammatical_vocabulary_book['neutral_nouns'].keys())
+    feminine_nouns_ends_with_soft_sign = (grammatical_vocabulary_book['feminine_nouns_ends_with_soft_sign'].keys())
+    masculine_nouns_ends_with_soft_sign = (grammatical_vocabulary_book['masculine_nouns_ends_with_soft_sign'].keys())
+    gender_exception.update(grammatical_vocabulary_book[gender_exception])
+
+    return 0
+
 def analyze_noun_gender(word):
 
     if word in feminine_nouns:
@@ -70,11 +87,18 @@ def noun_gender_quiz(voca_dict):
             break
         print("Answer : ")
         analyze_noun_gender(word)
-        score_record = int(input("if you got answer type '1', if not type '0' : "))
-        print('----------------------------------------------')
-        if score_record:
-            point += 1
-        tries += 1
+        while 1:
+            score_record = int(input("if you got answer type '1', if not type '0' : "))
+            print('----------------------------------------------')
+            if score_record == 1:
+                point += 1
+                break
+            elif score_record == 0:
+                tries += 1
+                break
+            else:
+                print("You pressed wrong key. Please input correct command")
+                _ = input('Press any key to retry')
 
     print('number of questions was {} and you got {} points'.format(tries, point))
     return 0
@@ -96,7 +120,11 @@ def noun_gender_guess():
 
     return 0
 
-def gender_review(voca_dict):
+def gender_review(selected_voca, grammatical_vocabulary_book):
+
+    voca_dict = selected_voca.update(grammatical_vocabulary_book)
+    update_noun_gender_list(grammatical_vocabulary_book)
+
     print('----------------------------------------------')
     print("Let's review the gender part.")
     while 1:
@@ -113,5 +141,8 @@ def gender_review(voca_dict):
             _ = input('Are you done? y/n : ')
             if _ == 'y':
                 break
+        else:
+            print("You pressed wrong key. Please input correct command")
+            _ = input('Press any key to retry')
 
     return 0

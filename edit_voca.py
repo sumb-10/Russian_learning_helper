@@ -68,7 +68,8 @@ def edit_vocas():
         if _ == 'quit':
             break
         else:
-            print('please write down properly')
+            print("You pressed wrong key. Please input correct command")
+            _ = input('Press any key to retry')
         print('----------------------------------------------')
 
     return 0

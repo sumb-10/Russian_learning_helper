@@ -1,4 +1,5 @@
 import os
+import sys
 from colorama import init, Fore, Style
 import number_quiz
 import pronounciation_review
@@ -7,61 +8,121 @@ import plurals_review
 import edit_voca
 
 init()
-vocas_path = './vocas'
-vocabulary_book = {}
-voca_list = []
+normal_vocas_path = './vocas/normal_voca'
+grammatical_vocas_path = './vocas/grammatical_voca'
+normal_vocabulary_book = {}
+grammer_vocabulary_book = {}
+normal_voca_list = []
 selected_voca = {}
 
 def select_voca():
 
     print('----------------------------------------------')
     print('please select vocabulary packs you want to study. type the indexes and press enter')
-    for i in range(len(voca_list)):
-        print("{} : {}".format(i, voca_list[i]))
-    selected_indexes = list(map(int, input().split()))
-    temp = []
-    for idx in selected_indexes:
-        temp.append(voca_list[idx])
-    selected_vocas = {}
-    for title in temp:
-        selected_vocas.update(vocabulary_book[title])
+    for i in range(len(normal_voca_list)):
+        print("{} : {}".format(i, normal_voca_list[i]))
+    try:
+        selected_indexes = list(map(int, input("select packs : ").split()))
+        temp = []
+        for idx in selected_indexes:
+            temp.append(normal_voca_list[idx])
+        selected_vocas = {}
+        for title in temp:
+            selected_vocas.update(normal_vocabulary_book[title])
 
-    print("voca successfully selected")
-    print('----------------------------------------------')
+        print("voca successfully selected")
+        print('----------------------------------------------')
 
-    return selected_vocas
+        return selected_vocas
+    except:
+        print("Error occured, press anykey to retry",end='')
+        _ = input('')
+        return {}
 
-
-def update_vocas_list():
+def update_normal_vocas_list():
     idx_count = 0
     voca_note_dict = {}
     vocas_list = {}
-    contents_list = os.listdir(vocas_path)
-    for content in contents_list:
-        if '.txt' in content:
-            voca_note_dict[idx_count] = content[:-4:]
-            idx_count += 1
+    contents_list = os.listdir(normal_vocas_path)
 
-    for idx in range(idx_count):
-        vocas = {}
-        title = voca_note_dict[idx]
-        f = open(vocas_path + '/' + title + '.txt', 'r',encoding='utf-8')
-        while True:
-            line = f.readline()
-            if line == '~':
-                break
-            word_and_meaning = line.split(' : ')
-            word = word_and_meaning[0]
-            meaning = word_and_meaning[1][:-1:]
-            vocas[word] = meaning
-        vocas_list[title] = vocas
+    try:
+        for content in contents_list:
+            if '.txt' in content:
+                voca_note_dict[idx_count] = content[:-4:]
+                idx_count += 1
 
+        for idx in range(idx_count):
+            vocas = {}
+            title = voca_note_dict[idx]
+            f = open(normal_vocas_path + '/' + title + '.txt', 'r',encoding='utf-8')
+            while True:
+                line = f.readline()
+                if line == '~':
+                    break
+                if not line:
+                    print("Error occured, press anykey to quit the program.")
+                    print("Please check the the file, '{}' in the 'vocas' directory if they are written properly.".format(title+".txt"))
+                    _ = input('\n')
+                    return {}
+                word_and_meaning = line.split(' : ')
+                word = word_and_meaning[0]
+                meaning = word_and_meaning[1][:-1:]
+                vocas[word] = meaning
+            vocas_list[title] = vocas
 
+        print('The vocabularys successfully updated')
+        print('----------------------------------------------')
 
-    print('The vocabularys successfully updated')
-    print('----------------------------------------------')
+        return vocas_list
 
-    return vocas_list
+    except:
+        print("Error occured, press anykey to quit the program.")
+        print("Please check the the files in the 'vocas' directory if they are written properly.")
+        _ = input('\n')
+        return {}
+
+def update_grammatical_vocas_list():
+    idx_count = 0
+    voca_note_dict = {}
+    vocas_list = {}
+    contents_list = os.listdir(grammatical_vocas_path)
+
+    try:
+        for content in contents_list:
+            if '.txt' in content:
+                voca_note_dict[idx_count] = content[:-4:]
+                idx_count += 1
+
+        for idx in range(idx_count):
+            vocas = {}
+            title = voca_note_dict[idx]
+            f = open(grammatical_vocas_path + '/' + title + '.txt', 'r',encoding='utf-8')
+            while True:
+                line = f.readline()
+                if line == '~':
+                    break
+                if not line:
+                    print("Error occured, press anykey to quit the program.")
+                    print("Please check the the file, '{}' in the 'vocas' directory if they are written properly.".format(title+".txt"))
+                    _ = input('\n')
+                    return {}
+                word_and_meaning = line.split(' : ')
+                word = word_and_meaning[0]
+                meaning = word_and_meaning[1][:-1:]
+                vocas[word] = meaning
+            vocas_list[title] = vocas
+
+        print('The vocabularys successfully updated')
+        print('----------------------------------------------')
+
+        return vocas_list
+
+    except:
+        print("Error occured, press anykey to quit the program.")
+        print("Please check the the files in the 'vocas' directory if they are written properly.")
+        _ = input('\n')
+        return {}
+
 
 def main_menu():
 
@@ -82,9 +143,9 @@ def main_menu():
         print('4 = edit_voca')
         print('voca = load_voca_list')
         print('select = Update words list to study')
-        print('quit = exit\n')
+        print('quit = exit')
 
-        select_course = input()
+        select_course = input("select course : ")
         if select_course == '0':
             number_quiz.number_quiz()
             _ = input('press any key to back to main menu')
@@ -92,17 +153,17 @@ def main_menu():
             pronounciation_review.pronounciation_review(selected_voca)
             _ = input('press any key to back to main menu')
         if select_course == '2':
-            gender_review.gender_review(selected_voca)
+            gender_review.gender_review(selected_voca, grammatical_vocabulary_book)
             _ = input('press any key to back to main menu')
         if select_course == '3':
-            plurals_review.plural_review(selected_voca)
+            plurals_review.plural_review(selected_voca, grammatical_vocabulary_book)
             _ = input('press any key to back to main menu')
         if select_course == '4':
             edit_voca.edit_vocas()
             _ = input('press any key to back to main menu')
         if select_course == 'voca':
-            for i in range(len(voca_list)):
-                print("{} : {}".format(i, voca_list[i]))
+            for i in range(len(normal_voca_list)):
+                print("{} : {}".format(i, normal_voca_list[i]))
                 _ = input('press any key to back to main menu')
         if select_course == 'select':
             selected_voca = select_voca()
@@ -112,12 +173,23 @@ def main_menu():
             if _ == 'y':
                 break
             _ = input('press any key to back to main menu')
+        else:
+            print("You pressed wrong key. Please input correct command")
+            _ = input('Press any key to retry')
 
     return 0
 
 if __name__ == "__main__":
-    vocabulary_book = update_vocas_list()
-    voca_list = list(vocabulary_book.keys())
+    normal_vocabulary_book = update_normal_vocas_list()
+    if normal_vocabulary_book == {}:
+        sys.exit()
+    normal_voca_list = list(normal_vocabulary_book.keys())
+
+    grammatical_vocabulary_book = update_grammatical_vocas_list()
+    if grammatical_vocabulary_book == {}:
+        sys.exit()
+
     _ = input('press any key to start')
-    selected_voca = select_voca()
+    while selected_voca == {}:
+        selected_voca = select_voca()
     main_menu()
