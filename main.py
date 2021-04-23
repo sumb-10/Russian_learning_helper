@@ -15,6 +15,23 @@ grammer_vocabulary_book = {}
 normal_voca_list = []
 selected_voca = {}
 
+big_letter = ['А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ъ', 'Ы', 'Ь', 'Э', 'Ю', 'Я']
+small_letter = ['а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ъ', 'ы', 'ь', 'э', 'ю', 'я']
+russian_alphabet_dict = {big_letter[i] : small_letter[i] for i in range(len(big_letter))}
+
+
+def make_all_letter_small(word):
+
+    wordlen = len(word)
+    new_word = ''
+    for i in range(wordlen):
+        if word[i] in russian_alphabet_dict:
+            new_word += russian_alphabet_dict[word[i]]
+        else:
+            new_word += word[i]
+    return new_word
+
+
 def select_voca():
 
     print('----------------------------------------------')
@@ -39,7 +56,9 @@ def select_voca():
         _ = input('')
         return {}
 
+
 def update_normal_vocas_list():
+
     idx_count = 0
     voca_note_dict = {}
     vocas_list = {}
@@ -81,7 +100,9 @@ def update_normal_vocas_list():
         _ = input('\n')
         return {}
 
+
 def update_grammatical_vocas_list():
+
     idx_count = 0
     voca_note_dict = {}
     vocas_list = {}
@@ -178,6 +199,7 @@ def main_menu():
             _ = input('Press any key to retry')
 
     return 0
+
 
 if __name__ == "__main__":
     normal_vocabulary_book = update_normal_vocas_list()

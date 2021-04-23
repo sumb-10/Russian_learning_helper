@@ -11,9 +11,25 @@ paired_unvoiced_consonants = ['п', 'ф', 'к', 'т', 'ш', 'с']
 unpaired_voiced_consonants = ['л', 'м', 'н', 'р']
 unpaired_unvoiced_consonats = ['х', 'ц', 'ч', 'щ']
 
+big_letter = ['А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ъ', 'Ы', 'Ь', 'Э', 'Ю', 'Я']
+small_letter = ['а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ъ', 'ы', 'ь', 'э', 'ю', 'я']
+russian_alphabet_dict = {big_letter[i] : small_letter[i] for i in range(len(big_letter))}
+
+
+def make_all_letter_small(word):
+
+    wordlen = len(word)
+    new_word = ''
+    for i in range(wordlen):
+        if word[i] in russian_alphabet_dict:
+            new_word += russian_alphabet_dict[word[i]]
+        else:
+            new_word += word[i]
+    return new_word
 
 
 def alphabet_pronounciation_quiz():
+
     print('----------------------------------------------')
     print("I will give you a kiril alphabet, speak out what you thought and check the answer by pushing any key")
     print("If you want to stop, input 'stop' after I gave you a question")
@@ -75,7 +91,11 @@ def alphabet_pronounciation_quiz():
 
     return 0
 
+
 def analyze_consonants_sounds(word):
+
+    word = make_all_letter_small(word)
+
     wordlen = len(word)
     hard_consonants_marking_list = []
     soft_consonants_marking_list = []
@@ -144,7 +164,9 @@ def analyze_consonants_sounds(word):
 
     return 0
 
+
 def consonants_hard_soft_sounds_quiz(voca_dict):
+
     word_list = list(voca_dict.keys())
     asked_list = []
     max_idx = len(voca_dict) - 1
@@ -165,6 +187,8 @@ def consonants_hard_soft_sounds_quiz(voca_dict):
         if idx in asked_list:
             continue
         word = word_list[idx]
+        word = make_all_letter_small(word)
+
         print("Guess the pronounciation : {}".format(word))
         _ = input()
         if _ == 'stop':
@@ -188,7 +212,9 @@ def consonants_hard_soft_sounds_quiz(voca_dict):
     print('----------------------------------------------')
     return 0
 
+
 def consonants_sounds_guess():
+
     print('----------------------------------------------')
     print("Write down the noun. I will figure out how it's consonants pronounced. if you want to quit, type stop")
     print("The guess is only figured out by the database, so please search it on the internet. It could be wrong")
@@ -197,6 +223,7 @@ def consonants_sounds_guess():
 
     while 1:
         word = input("Write down the noun : ")
+        word = make_all_letter_small(word)
         if word == 'stop':
             print('----------------------------------------------')
             break
@@ -207,7 +234,9 @@ def consonants_sounds_guess():
 
     return 0
 
+
 def pronounciation_review(voca_dict):
+
     print('----------------------------------------------')
     print("Let's review the pronounciation part.")
     while 1:

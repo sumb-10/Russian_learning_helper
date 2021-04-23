@@ -2,7 +2,9 @@ import os
 
 vocas_path = './vocas'
 
+
 def write_new_voca_note():
+
     title = input("Write the title of voca note : ")
     f = open(vocas_path + '/' + title +'.txt', 'w',encoding='utf-8')
     print('Write down the word you want to add. Please use the next form. [Word] : [meaning]')
@@ -30,6 +32,7 @@ def write_new_voca_note():
 
 
 def add_new_vocas():
+
     title = input("Write the title of voca note : ")
     f = open(vocas_path + '/' + title + '.txt', 'a')
     print('Write down the word you want to add. Please use the next form. [Word] : [meaning]')
@@ -54,7 +57,9 @@ def add_new_vocas():
 
     return 0
 
+
 def edit_vocas():
+
     while 1:
         print('press 0 to write new voca note')
         print('press 1 to add new vocas in a voca note')

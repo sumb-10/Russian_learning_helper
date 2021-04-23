@@ -5,8 +5,24 @@ feminine_nouns = []
 masculine_nouns = []
 neutral_nouns = []
 feminine_nouns_ends_with_soft_sign = []
-masculine_nouns_ends_with_soft_sign = []
 gender_exception = {}
+
+big_letter = ['А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ъ', 'Ы', 'Ь', 'Э', 'Ю', 'Я']
+small_letter = ['а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ъ', 'ы', 'ь', 'э', 'ю', 'я']
+russian_alphabet_dict = {big_letter[i] : small_letter[i] for i in range(len(big_letter))}
+
+
+def make_all_letter_small(word):
+
+    wordlen = len(word)
+    new_word = ''
+    for i in range(wordlen):
+        if word[i] in russian_alphabet_dict:
+            new_word += russian_alphabet_dict[word[i]]
+        else:
+            new_word += word[i]
+    return new_word
+
 
 def update_noun_gender_list(grammatical_vocabulary_book):
 
@@ -14,18 +30,20 @@ def update_noun_gender_list(grammatical_vocabulary_book):
     global masculine_nouns
     global neutral_nouns
     global feminine_nouns_ends_with_soft_sign
-    global masculine_nouns_ends_with_soft_sign
 
     feminine_nouns = (grammatical_vocabulary_book['feminine_nouns'].keys())
     masculine_nouns = (grammatical_vocabulary_book['masculine_nouns'].keys())
     neutral_nouns = (grammatical_vocabulary_book['neutral_nouns'].keys())
     feminine_nouns_ends_with_soft_sign = (grammatical_vocabulary_book['feminine_nouns_ends_with_soft_sign'].keys())
-    masculine_nouns_ends_with_soft_sign = (grammatical_vocabulary_book['masculine_nouns_ends_with_soft_sign'].keys())
     gender_exception.update(grammatical_vocabulary_book[gender_exception])
 
     return 0
 
+
 def analyze_noun_gender(word):
+
+
+    word = make_all_letter_small(word)
 
     if word in feminine_nouns:
         print("\033[34m" + '{} '.format(word) + "\033[0m" + 'is a feminine noun(Женский род)')
@@ -65,7 +83,9 @@ def analyze_noun_gender(word):
 
     return 0
 
+
 def noun_gender_quiz(voca_dict):
+
     word_list = list(voca_dict.keys())
     asked_list = []
     max_idx = len(voca_dict) - 1
@@ -103,13 +123,18 @@ def noun_gender_quiz(voca_dict):
     print('number of questions was {} and you got {} points'.format(tries, point))
     return 0
 
+
 def noun_gender_guess():
+
     print('----------------------------------------------')
     print("Write down the noun. I will figure out it's gender. if you want to quit, type stop")
     print("The guess is only figured out by the database, so please search it on the internet. It could be wrong")
 
     while 1:
+
         word = input("Write down the noun : ")
+        word = make_all_letter_small(word)
+
         if word == 'stop':
             print('----------------------------------------------')
             break
@@ -120,7 +145,9 @@ def noun_gender_guess():
 
     return 0
 
+
 def gender_review(selected_voca, grammatical_vocabulary_book):
+
 
     voca_dict = selected_voca.update(grammatical_vocabulary_book)
     update_noun_gender_list(grammatical_vocabulary_book)

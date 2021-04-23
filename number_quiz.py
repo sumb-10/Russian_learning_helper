@@ -5,7 +5,25 @@ number_dict_tens_digit = {0 : '', 1 : 'десять', 2 : 'двадцать', 3 
 number_dict_hundreds_digit = {0 : '', 1 : 'сто', 2 : 'двести', 3 : 'триста', 4 : 'четыреста', 5 : 'пятьсот', 6 : 'шестьсот', 7 : 'семьсот', 8 : 'восемьсот', 9 : 'девятьсот', 10 : 'тысяча'}
 number_dict_thousand_digit = {0 : 'тысяч', 1: 'одна тысяча', 2 : 'две тысячи', 3 : 'три тысячи', 4 : 'четыре тысячи', 5 : 'пять тысяч', 6 : 'шесть тысяч', 7 : 'семь тысяч', 8 : 'восемь тысяч', 9 : 'девять тысяч', 10 : 'десять тысяч'}
 
+big_letter = ['А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ъ', 'Ы', 'Ь', 'Э', 'Ю', 'Я']
+small_letter = ['а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ъ', 'ы', 'ь', 'э', 'ю', 'я']
+russian_alphabet_dict = {big_letter[i] : small_letter[i] for i in range(len(big_letter))}
+
+
+def make_all_letter_small(word):
+
+    wordlen = len(word)
+    new_word = ''
+    for i in range(wordlen):
+        if word[i] in russian_alphabet_dict:
+            new_word += russian_alphabet_dict[word[i]]
+        else:
+            new_word += word[i]
+    return new_word
+
+
 def find_answer(number):
+
     if number == 0:
         return 'нуль'
     elif number == 100:
@@ -68,7 +86,9 @@ def find_answer(number):
 
         return answer[1:]
 
+
 def number_quiz():
+
     print('----------------------------------------------')
 
     print("recommanded courses :\n1 ~ 100\n100 ~ 1000\n1000 ~ 10000\n10000 ~ 1000000")

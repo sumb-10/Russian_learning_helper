@@ -2,7 +2,27 @@ import random
 
 hard_consonants = ['б', 'в', 'г', 'д', 'ж', 'з', 'к', 'л', 'м', 'н', 'п', 'р', 'с', 'т', 'ф', 'х', 'ц', 'ш']
 plural_exceptions = []
+
+big_letter = ['А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ъ', 'Ы', 'Ь', 'Э', 'Ю', 'Я']
+small_letter = ['а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ъ', 'ы', 'ь', 'э', 'ю', 'я']
+russian_alphabet_dict = {big_letter[i] : small_letter[i] for i in range(len(big_letter))}
+
+
+def make_all_letter_small(word):
+
+    wordlen = len(word)
+    new_word = ''
+    for i in range(wordlen):
+        if word[i] in russian_alphabet_dict:
+            new_word += russian_alphabet_dict[word[i]]
+        else:
+            new_word += word[i]
+    return new_word
+
+
 def make_plural_noun(word):
+
+    word = make_all_letter_small(word)
 
     if word[-1] in hard_consonants:
         print('plural form : ' + word + 'ы')
@@ -33,6 +53,7 @@ def make_plural_noun(word):
         print('Because it is exception')
 
     return 0
+
 
 def guess_plural_noun(voca_dict):
 
@@ -75,6 +96,7 @@ def guess_plural_noun(voca_dict):
     print('number of questions was {} and you got {} points'.format(tries, point))
     print('----------------------------------------------')
     return 0
+
 
 def plural_review(selected_voca, grammatical_vocabulary_book):
 
